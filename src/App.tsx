@@ -27,14 +27,20 @@ import PercentView from "./components/PercentView";
 //     x + 1
 //   )
 // }
+import { useState } from "react";
 
+let current: number = 50;
 const App = () => {
+  const [rangeValue, setRangeValue] = useState(100)
   let cislo: number = 34;
-  cislo -= 1;
+  const initialValue: number = 50;
   return(
     <>
-     <PercentView value={cislo + 1} max={100} makeColor={(p) => `rgb(0,${p*100*20},0)`} />
-     <PercentView value={cislo + 1} max={200} makeColor={(p) => `rgb(0,0,${p*100*20})`} />
+    <div style={{justifySelf: 'center'}}>
+      <input type="range" min={0} max={100} onChange={(e) => {setRangeValue(Math.round( parseInt(e.target.value)))}} defaultValue={initialValue} />
+    </div>
+     <PercentView value={rangeValue} max={200} makeColor={(p) => `hsl(${p*100}, 100%, 50%)`} />
+     <PercentView value={cislo} max={200} makeColor={(p) => `rgb(0,0,${p*100*20})`} />
      <PercentView value={30} max={300} makeColor={(p) => `rgb(${p*100*20},0,0)`} />
     </>
   )
